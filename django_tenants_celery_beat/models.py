@@ -13,9 +13,9 @@ from django_tenants_celery_beat.utils import get_periodic_task_tenant_link_model
 class TenantTimezoneMixin(models.Model):
     timezone = timezone_field.TimeZoneField(
         default="UTC",
-        display_GMT_offset=getattr(
+        choices_display="WITH_GMT_OFFSET" if getattr(
             settings, "TENANT_TIMEZONE_DISPLAY_GMT_OFFSET", False
-        ),
+        ) else None,
     )
 
     class Meta:
